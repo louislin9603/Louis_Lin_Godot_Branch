@@ -15,6 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://byyaly5nd6ylj" path="res://Sunny-land-files/Graphical Assets/sprites/player/run/player-run-5.png" id="13_4f33b"]
 [ext_resource type="Texture2D" uid="uid://yydxxg17x1n1" path="res://Sunny-land-files/Graphical Assets/sprites/player/run/player-run-6.png" id="14_1o0um"]
 
+[sub_resource type="Animation" id="Animation_auww1"]
+resource_name = "Death"
+
 [sub_resource type="Animation" id="Animation_fjbyv"]
 resource_name = "Idle"
 tracks/0/type = "value"
@@ -44,9 +47,6 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_kgk5p"]
 resource_name = "Jump"
-
-[sub_resource type="Animation" id="Animation_auww1"]
-resource_name = "Death"
 
 [sub_resource type="Animation" id="Animation_oynky"]
 length = 0.001
