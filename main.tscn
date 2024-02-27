@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4qtuon8optxb"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_vf8u8"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_vf8u8")
+
+[node name="Play" type="Button" parent="."]
+offset_left = 205.0
+offset_top = 87.0
+offset_right = 410.0
+offset_bottom = 208.0
+text = "Play"
+metadata/_edit_group_ = true
+
+[node name="Quit" type="Button" parent="."]
+offset_left = 207.0
+offset_top = 225.0
+offset_right = 412.0
+offset_bottom = 346.0
+tooltip_text = "Are you sure you want to quit?"
+text = "Quit"
+metadata/_edit_group_ = true
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
