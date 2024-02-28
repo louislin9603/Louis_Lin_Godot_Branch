@@ -7,8 +7,8 @@ var player
 var chase = false
 const JUMP_VELOCITY = -250.0
 
-const JUMP_DELAY = 2.0 
-var jump_timer = 0.0
+func _ready():
+	get_node("AnimatedSprite2D").play("Idle")
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -16,11 +16,9 @@ func _physics_process(delta):
 	
 	if chase == true:
 		if is_on_floor():
-			jump_timer += delta
-			
-			if jump_timer >= JUMP_DELAY:
-				jump_timer = 0.0
-				velocity.y = JUMP_VELOCITY
+
+			velocity.y = JUMP_VELOCITY
+			if get_node("AnimatedSprite2D").animation != "Death":
 				get_node("AnimatedSprite2D").play("Jump")
 			
 
@@ -37,7 +35,8 @@ func _physics_process(delta):
 			
 	else:
 		velocity.x = 0
-		get_node("AnimatedSprite2D").play("Idle")
+		if get_node("AnimatedSprite2D").animation != "Death":
+			get_node("AnimatedSprite2D").play("Idle")
 		
 	move_and_slide()
 		
@@ -49,4 +48,28 @@ func _on_player_detection_body_entered(body):
 func _on_player_detection_body_exited(body):
 	if body.name == "Player":
 		chase = false
+		
 
+func _on_player_death_body_entered(body):
+	
+	#If player steps on top (collision box) of the frog, frog stops moving and dies
+	if body.name == "Player":
+		velocity.x = 0
+		chase = false
+		get_node("AnimatedSprite2D").play("Death")
+		await get_node("AnimatedSprite2D").animation_finished
+		self.queue_free()
+		Game.Gold += 1
+		Utils.saveGame()
+
+
+func _on_player_collision_body_entered(body):
+	#If player hits the side of the frog, takes damage
+	if body.name == "Player":
+		Game.playerHP -= 1
+		player.get_node("AnimatedSprite2D").play("Death")
+
+
+
+func _on_timer_timeout():
+	print("hi")

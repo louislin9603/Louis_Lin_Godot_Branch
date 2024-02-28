@@ -1,0 +1,73 @@
+[gd_scene load_steps=14 format=3 uid="uid://dn5ete4q61rwj"]
+
+[ext_resource type="Script" path="res://Gold Coin.gd" id="1_xmpj2"]
+[ext_resource type="Texture2D" uid="uid://co7okcgd24ucw" path="res://PNG/Gold/Gold_1.png" id="2_kexwd"]
+[ext_resource type="Texture2D" uid="uid://20ip708vegwd" path="res://PNG/Gold/Gold_2.png" id="3_cjpj4"]
+[ext_resource type="Texture2D" uid="uid://r7hrhftx6hwn" path="res://PNG/Gold/Gold_3.png" id="4_lumc4"]
+[ext_resource type="Texture2D" uid="uid://oln4urhfipn1" path="res://PNG/Gold/Gold_4.png" id="5_nrjh6"]
+[ext_resource type="Texture2D" uid="uid://dj550ohti0qxl" path="res://PNG/Gold/Gold_5.png" id="6_q1wrd"]
+[ext_resource type="Texture2D" uid="uid://b7etmwtd2w83j" path="res://PNG/Gold/Gold_6.png" id="7_haxpd"]
+[ext_resource type="Texture2D" uid="uid://bjgp2ay00bfl1" path="res://PNG/Gold/Gold_7.png" id="8_38enj"]
+[ext_resource type="Texture2D" uid="uid://xtrrmei4hjjt" path="res://PNG/Gold/Gold_8.png" id="9_1w1yo"]
+[ext_resource type="Texture2D" uid="uid://dnji4pqeo3l8l" path="res://PNG/Gold/Gold_9.png" id="10_jhhcm"]
+[ext_resource type="Texture2D" uid="uid://bluol46dqi3ob" path="res://PNG/Gold/Gold_10.png" id="11_5ajr1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nelbn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kexwd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_cjpj4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_lumc4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_nrjh6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_q1wrd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_haxpd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_38enj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_1w1yo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_jhhcm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_5ajr1")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ang3v"]
+radius = 153.632
+
+[node name="Gold Coin" type="Area2D"]
+self_modulate = Color(1, 1, 1, 0)
+script = ExtResource("1_xmpj2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1.90735e-06, -1)
+scale = Vector2(0.0276976, 0.0274823)
+sprite_frames = SubResource("SpriteFrames_nelbn")
+animation = &"Idle"
+autoplay = "Idle"
+speed_scale = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3.55271e-15, -1)
+scale = Vector2(0.0589476, 0.0585107)
+shape = SubResource("CircleShape2D_ang3v")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

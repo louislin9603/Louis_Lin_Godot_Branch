@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://b5f5rulxxgwd"]
+[gd_scene load_steps=12 format=3 uid="uid://b5f5rulxxgwd"]
 
 [ext_resource type="PackedScene" uid="uid://drlf7lh128wcj" path="res://Player/Player.tscn" id="1_6m1vi"]
 [ext_resource type="Texture2D" uid="uid://dt1oo38hai2rg" path="res://sunny-land/assets/environment/back.png" id="1_b1ogr"]
 [ext_resource type="Script" path="res://main.gd" id="1_b2eph"]
 [ext_resource type="Texture2D" uid="uid://cyc0iqknbmit1" path="res://sunny-land/assets/environment/tileset.png" id="1_bu82d"]
 [ext_resource type="PackedScene" uid="uid://c6iv1g17y3y4s" path="res://Frog.tscn" id="5_lbpgw"]
+[ext_resource type="PackedScene" uid="uid://dn5ete4q61rwj" path="res://Gold Coin.tscn" id="6_yydc8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w1pop"]
 texture = ExtResource("1_bu82d")
@@ -418,6 +419,36 @@ func _process(delta):
 	scroll_offset.x -= scrolling_speed * delta
 "
 
+[sub_resource type="GDScript" id="GDScript_vqr6g"]
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	#This is the HP UI SCRIPT
+	text = \"HP: \" + str(Game.playerHP)
+"
+
+[sub_resource type="GDScript" id="GDScript_p2ym0"]
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	#This is the GOLD UI SCRIPT
+	text = \"Gold: \" + str(Game.Gold)
+"
+
 [node name="World" type="Node2D"]
 script = ExtResource("1_b2eph")
 
@@ -443,7 +474,35 @@ position = Vector2(158, 184)
 [node name="Player" parent="Player" instance=ExtResource("1_6m1vi")]
 position = Vector2(-1, 109)
 
+[node name="Collectibles" type="Node2D" parent="."]
+position = Vector2(158, 184)
+
+[node name="Gold Coin" parent="Collectibles" instance=ExtResource("6_yydc8")]
+position = Vector2(206, 158)
+
 [node name="Mobs" type="Node2D" parent="."]
 
 [node name="Frog" parent="Mobs" instance=ExtResource("5_lbpgw")]
 position = Vector2(733, 217)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HP" type="Label" parent="UI"]
+offset_left = 3.0
+offset_top = 19.0
+offset_right = 119.0
+offset_bottom = 81.0
+theme_override_colors/font_color = Color(0.317647, 0.466667, 0.462745, 1)
+theme_override_font_sizes/font_size = 35
+text = "HP:"
+script = SubResource("GDScript_vqr6g")
+
+[node name="Gold" type="Label" parent="UI"]
+offset_left = 2.0
+offset_top = 78.0
+offset_right = 118.0
+offset_bottom = 140.0
+theme_override_colors/font_color = Color(0.764706, 0.494118, 0.0392157, 1)
+theme_override_font_sizes/font_size = 35
+text = "Gold:"
+script = SubResource("GDScript_p2ym0")
